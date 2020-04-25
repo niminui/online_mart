@@ -1,0 +1,451 @@
+<html class="no-js" lang="zh" xmlns:th="http://www.thymeleaf.org" >
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>大润发 - 登录 & 注册</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Favicons -->
+    <link rel="shortcut icon" href="assets/img/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" href="assets/img/icon.png">
+
+    <script type="text/javascript" src="documentation/assets/js/jquery.js"></script>
+
+    <!-- ************************* CSS Files ************************* -->
+
+    <!-- Vendor CSS -->
+    <link rel="stylesheet" href="assets/css/vendor.css">
+
+    <!-- style css -->
+    <link rel="stylesheet" href="assets/css/main.css">
+
+</head>
+
+<body>
+
+    <!-- Preloader Start -->
+    <div class="zakas-preloader active">
+        <div class="zakas-preloader-inner h-100 d-flex align-items-center justify-content-center">
+            <div class="zakas-child zakas-bounce1"></div>
+            <div class="zakas-child zakas-bounce2"></div>
+            <div class="zakas-child zuka-bounce3"></div>
+        </div>
+    </div>
+    <!-- Preloader End -->
+
+    <!-- Main Wrapper Start -->
+    <div class="wrapper">
+        <div th:replace="~{navigation :: navi}"></div>
+
+        <!-- Breadcrumb area Start -->
+        <div class="breadcrumb-area bg-color ptb--90" data-bg-color="#f6f6f6">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="d-flex justify-content-between align-items-center flex-sm-row flex-column">
+                            <h1 class="page-title">登录 &amp; 注册</h1>
+                            <ul class="breadcrumb">
+                                <li><a href="/">主页</a></li>
+                                <li class="current"><span>登录 &amp; 注册</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Breadcrumb area End -->
+
+        <!-- Main Content Wrapper Start -->
+        <div class="main-content-wrapper">
+            <div class="page-content-inner pt--75 pb--80">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6 mb-sm--50">
+                            <div class="login-box">
+                                <h3 class="heading__tertiary mb--30">登录</h3>
+                                <form class="form form--login" action="/login">
+                                    <div class="form__group mb--20">
+                                        <label class="form__label form__label--2" for="username_email"> Email <span class="required">*</span></label>
+                                        <input type="email" class="form__input form__input--2" id="username_email" name="email" autocomplete="off">
+                                        <span class="helpBlock"></span>
+                                    </div>
+                                    <div class="form__group mb--20">
+                                       <label class="form__label form__label--2" for="login_password">密码 <span class="required">*</span></label>
+                                        <input type="password" class="form__input form__input--2" id="login_password" name="password">
+                                        <span class="helpBlock"></span>
+                                    </div>
+                                    <div class="d-flex align-items-center mb--20">
+                                        <div class="form__group mr--30">
+                                            <input id="login_submit" type="submit" value="登录" class="btn-submit">
+                                        </div>
+                                        <div class="form__group">
+                                            <label class="form__label checkbox-label" for="store_session">
+                                                <input type="checkbox" name="store_session" id="store_session">
+                                                <span>记住我</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <a class="forgot-pass" href="#">忘记密码？</a>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="register-box">
+                                <h4 class="heading__tertiary mb--30">注册</h4>
+                                <form class="form form--login" action="/register" method="post">
+                                    <div class="form__group mb--20">
+                                        <label class="form__label form__label--2" for="email">Email <span class="required">*</span></label>
+                                        <input type="email" class="form__input form__input--2" id="email" name="email" autocomplete="off">
+                                        <span class="helpBlock"></span>
+                                    </div>
+                                    <div class="form__group mb--20">
+                                       <label class="form__label form__label--2" for="register_password">密码 <span class="required">*</span></label>
+                                        <input type="password" class="form__input form__input--2" id="register_password" name="password">
+                                        <span class="helpBlock"></span>
+                                    </div>
+                                    <div class="form__group mb--20">
+                                        <label class="form__label form__label--2" for="register_password">确认密码 <span class="required">*</span></label>
+                                        <input type="password" class="form__input form__input--2" id="confirm_register_password" name="confirm_password">
+                                        <span class="helpBlock"></span>
+                                    </div>
+                                    <p class="privacy-text mb--20">您的个人数据将用于支持您在整个网站上的体验，管理对帐户的访问以及用于我们的隐私政策中所述的其他目的。</p>
+                                    <div class="form__group">
+                                        <input id="register_submit" type="submit" value="注册" class="btn btn-submit btn-style-1">
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Main Content Wrapper Start -->
+
+        <script type="text/javascript" th:inline="javascript">
+            //获取项目根目录
+            var ctxPath=[[${#httpServletRequest.getContextPath()}]];
+
+            //注册时验证
+            function validate_register_form() {
+                //验证邮箱信息
+                var email = $("#email").val();
+                var regEmail = /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/;
+                if(email == null || email === "") {
+                    show_validate_msg("#email","error","邮箱不能为空！");
+                    return false;
+                } else if(!regEmail.test(email)) {
+                    show_validate_msg("#email","error","邮箱格式不正确");
+                    return false;
+                } else {
+                    show_validate_msg("#email","success","");
+                }
+
+                //验证密码
+                var password = $("#register_password").val();
+                var confirm_password = $("#confirm_register_password").val();
+                var regPassword = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,16}$/;
+                if(password == null || password === "") {
+                    show_validate_msg("#register_password","error","密码必须包含字母和数字，且长度在8~16位之间！");
+                    return false;
+                } else if(!regPassword.test(password)) {
+                    show_validate_msg("#register_password","error","密码必须包含字母和数字，且长度在8~16位之间！");
+                    return false;
+                } else {
+                    if(password !== confirm_password) {
+                        show_validate_msg("#register_password","success","");
+                        show_validate_msg("#confirm_register_password","error","两次密码输入不一致！");
+                        return false;
+                    }
+                    show_validate_msg("#register_password","success","");
+                }
+                return true;
+            }
+
+            //登录时验证
+            function validate_login_form() {
+                var email = $("#username_email").val();
+                var regEmail = /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/;
+                if(email == null || email === "") {
+                    show_validate_msg("#username_email","error","邮箱不能为空！");
+                    return false;
+                } else if(!regEmail.test(email)) {
+                    show_validate_msg("#username_email","error","邮箱格式不正确!");
+                    return false;
+                } else {
+                    show_validate_msg("#username_email","success","");
+                }
+
+                var password = $("#login_password").val();
+                if(password == null || password === "") {
+                    show_validate_msg("#login_password","error","密码不能为空！");
+                    return false;
+                } else {
+                    show_validate_msg("#register_password","success","");
+                }
+                return true;
+            }
+
+            //显示校验结果的提示
+            function show_validate_msg(ele,status,msg) {
+                //清楚当前元素校验状态
+                $(ele).parent().removeClass("has-success has-error");
+                $(ele).next("span").text("");
+                if(status == "success") {
+                    $(ele).parent().addClass("has-success");
+                    $(ele).next("span").text(msg);
+                } else if (status == "error"){
+                    $(ele).parent().addClass("has-error");
+                    $(ele).next("span").text(msg);
+                }
+            }
+
+            //点击注册时进行验证
+            $("#register_submit").click(function () {
+                //进行邮箱和密码的校验
+                if(!validate_register_form()) {
+                    return false;
+                }
+            });
+
+            //验证注册邮箱是否可用
+            $("#email").change(function () {
+                var register_email = this.value;
+                $.ajax({
+                    url:ctxPath + "/checkEmail",
+                    data:"email=" + register_email,
+                    type:"POST",
+                    success:function (result) {
+                        if(result.code === 100) {
+                            show_validate_msg("#email","success","");
+                        } else {
+                            show_validate_msg("#email","error",result.extend.va_msg);
+                        }
+                    }
+                });
+            });
+
+            //点击登录时进行验证
+            $("#login_submit").click(function () {
+                if(!validate_login_form()) {
+                    return false;
+                }
+            });
+
+        </script>
+
+       <div th:replace="footer :: footer"></div>
+
+        <!-- Mini Cart Start -->
+        <aside class="mini-cart" id="miniCart">
+            <div class="mini-cart-wrapper">
+                <a href="" class="btn-close"><i class="flaticon flaticon-cross"></i></a>
+                <div class="mini-cart-inner">
+                    <h3 class="mini-cart__heading mb--40 mb-lg--30">购物车</h3>
+                    <div class="mini-cart__content">
+                        <ul class="mini-cart__list">
+                            <li class="mini-cart__product">
+                                <a href="#" class="remove-from-cart remove">
+                                    <i class="flaticon flaticon-cross"></i>
+                                </a>
+                                <div class="mini-cart__product__image">
+                                    <img src="assets/img/products/prod-1-100x100.jpg" alt="products">
+                                </div>
+                                <div class="mini-cart__product__content">
+                                    <a class="mini-cart__product__title" href="product-details.html">Chain print bermuda shorts  </a>
+                                    <span class="mini-cart__product__quantity">1 x $49.00</span>
+                                </div>
+                            </li>
+                            <li class="mini-cart__product">
+                                <a href="#" class="remove-from-cart remove">
+                                    <i class="flaticon flaticon-cross"></i>
+                                </a>
+                                <div class="mini-cart__product__image">
+                                    <img src="assets/img/products/prod-2-100x100.jpg" alt="products">
+                                </div>
+                                <div class="mini-cart__product__content">
+                                    <a class="mini-cart__product__title" href="product-details.html">Waxed-effect pleated skirt</a>
+                                    <span class="mini-cart__product__quantity">1 x $49.00</span>
+                                </div>
+                            </li>
+                            <li class="mini-cart__product">
+                                <a href="#" class="remove-from-cart remove">
+                                    <i class="flaticon flaticon-cross"></i>
+                                </a>
+                                <div class="mini-cart__product__image">
+                                    <img src="assets/img/products/prod-5-100x100.jpg" alt="products">
+                                </div>
+                                <div class="mini-cart__product__content">
+                                    <a class="mini-cart__product__title" href="product-details.html">Waxed-effect pleated skirt</a>
+                                    <span class="mini-cart__product__quantity">1 x $49.00</span>
+                                </div>
+                            </li>
+                        </ul>
+                        <div class="mini-cart__total">
+                            <span>总计</span>
+                            <span class="ammount">$98.00</span>
+                        </div>
+                        <div class="mini-cart__buttons">
+                            <a href="cart.html" class="btn btn-fullwidth btn-bg-sand mb--20">查看购物车</a>
+                            <a href="checkout.html" class="btn btn-fullwidth btn-bg-sand">查看</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+        <!-- Mini Cart End -->
+
+        <!-- Global Overlay Start -->
+        <div class="zakas-global-overlay"></div>
+        <!-- Global Overlay End -->
+
+        <!-- Qicuk View Modal Start -->
+        <div class="modal fade product-modal" id="productModal" tabindex="-1" role="dialog" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-body">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true"><i class="flaticon flaticon-cross"></i></span>
+                </button>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="zakas-element-carousel nav-vertical-center"
+                        data-slick-options='{
+                            "slidesToShow": 1,
+                            "slidesToScroll": 1,
+                            "arrows": true,
+                            "prevArrow": {"buttonClass": "slick-btn slick-prev", "iconClass": "fa fa-angle-double-left" },
+                            "nextArrow": {"buttonClass": "slick-btn slick-next", "iconClass": "fa fa-angle-double-right" }
+                        }'
+                        >
+                            <div class="product-image">
+                                <div class="product-image--holder">
+                                    <a href="product-details.html">
+                                        <img src="assets/img/products/prod-9-1.jpg" alt="Product Image" class="primary-image">
+                                    </a>
+                                </div>
+                                <span class="product-badge sale">sale</span>
+                            </div>
+                            <div class="product-image">
+                                <div class="product-image--holder">
+                                    <a href="product-details.html">
+                                        <img src="assets/img/products/prod-9-1.jpg" alt="Product Image" class="primary-image">
+                                    </a>
+                                </div>
+                                <span class="product-badge sale">sale</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="modal-box product-summary">
+                            <div class="product-navigation text-right mb--20">
+                                <a href="#" class="prev"><i class="fa fa-angle-double-left"></i></a>
+                                <a href="#" class="next"><i class="fa fa-angle-double-right"></i></a>
+                            </div>
+                            <div class="product-rating d-flex mb--20">
+                                <div class="star-rating star-three">
+                                    <span>Rated <strong class="rating">5.00</strong> out of 5</span>
+                                </div>
+                            </div>
+                            <h3 class="product-title mb--20">Black Blazer</h3>
+                            <p class="product-short-description mb--25">Donec accumsan auctor iaculis. Sed suscipit arcu ligula, at egestas magna molestie a. Proin ac ex maximus, ultrices justo eget, sodales orci. Aliquam egestas libero ac turpis pharetra, in vehicula lacus scelerisque. Vestibulum ut sem laoreet, feugiat tellus at, hendrerit arcu.</p>
+                            <div class="product-price-wrapper mb--25">
+                                <span class="money">$200.00</span>
+                                <span class="price-separator">-</span>
+                                <span class="money">$400.00</span>
+                            </div>
+                            <form action="#" class="variation-form mb--30">
+                                <div class="product-color-variations d-flex align-items-center mb--20">
+                                    <p class="variation-label">Color:</p>
+                                    <div class="product-color-variation variation-wrapper">
+                                        <div class="variation">
+                                            <a class="product-color-variation-btn red selected" data-toggle="tooltip" data-placement="top" title="Red">
+                                                <span class="product-color-variation-label">Red</span>
+                                            </a>
+                                        </div>
+                                        <div class="variation">
+                                            <a class="product-color-variation-btn black" data-toggle="tooltip" data-placement="top" title="Black">
+                                                <span class="product-color-variation-label">Black</span>
+                                            </a>
+                                        </div>
+                                        <div class="variation">
+                                            <a class="product-color-variation-btn pink" data-toggle="tooltip" data-placement="top" title="Pink">
+                                                <span class="product-color-variation-label">Pink</span>
+                                            </a>
+                                        </div>
+                                        <div class="variation">
+                                            <a class="product-color-variation-btn blue" data-toggle="tooltip" data-placement="top" title="Blue">
+                                                <span class="product-color-variation-label">Blue</span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="product-size-variations d-flex align-items-center mb--15">
+                                    <p class="variation-label">Size:</p>   
+                                    <div class="product-size-variation variation-wrapper">
+                                        <div class="variation">
+                                            <a class="product-size-variation-btn selected" data-toggle="tooltip" data-placement="top" title="S">
+                                                <span class="product-size-variation-label">S</span>
+                                            </a>
+                                        </div>
+                                        <div class="variation">
+                                            <a class="product-size-variation-btn" data-toggle="tooltip" data-placement="top" title="M">
+                                                <span class="product-size-variation-label">M</span>
+                                            </a>
+                                        </div>
+                                        <div class="variation">
+                                            <a class="product-size-variation-btn" data-toggle="tooltip" data-placement="top" title="L">
+                                                <span class="product-size-variation-label">L</span>
+                                            </a>
+                                        </div>
+                                        <div class="variation">
+                                            <a class="product-size-variation-btn" data-toggle="tooltip" data-placement="top" title="XL">
+                                                <span class="product-size-variation-label">XL</span>
+                                            </a>
+                                        </div>
+                                    </div>                                 
+                                </div>
+                                <a href="" class="reset_variations">Clear</a>
+                            </form>
+                            <div class="product-action d-flex flex-sm-row flex-column align-items-sm-center align-items-start mb--30">
+                                <div class="quantity-wrapper d-flex align-items-center mr--30 mr-xs--0 mb-xs--30">
+                                    <label class="quantity-label" for="quick-qty">Quantity:</label>
+                                    <div class="quantity">
+                                        <input type="number" class="quantity-input" name="qty" id="quick-qty" value="1" min="1">
+                                    </div>
+                                </div>
+                                <button type="button" class="btn btn-small btn-bg-red btn-color-white btn-hover-2" onclick="window.location.href='cart.html'">
+                                    Add To Cart
+                                </button>
+                            </div>  
+                            <div class="product-footer-meta">
+                                <p><span>Category:</span>
+                                    <a href="shop.html">Full Sweater</a>,
+                                    <a href="shop.html">SweatShirt</a>,
+                                    <a href="shop.html">Jacket</a>,
+                                    <a href="shop.html">Blazer</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Qicuk View Modal End -->
+    </div>
+    <!-- Main Wrapper End -->
+ 
+
+    <!-- ************************* JS Files ************************* -->
+
+    <!-- jQuery JS -->
+    <script src="assets/js/vendor.js"></script>
+
+    <!-- Main JS -->
+    <script src="assets/js/main.js"></script>
+
+</body>
+
+</html>

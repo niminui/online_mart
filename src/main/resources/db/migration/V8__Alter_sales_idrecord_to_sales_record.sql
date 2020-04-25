@@ -1,0 +1,1 @@
+RENAME TABLE `sales_idrecord` TO `sales_record`;
