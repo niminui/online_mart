@@ -10,6 +10,7 @@
     <!-- Favicons -->
     <link rel="shortcut icon" href="assets/img/favicon.ico" type="image/x-icon">
     <link rel="apple-touch-icon" href="assets/img/icon.png">
+    <link href="/documentation/assets/css/bootstrap.css">
 
     <!-- ************************* CSS Files ************************* -->
 
@@ -340,7 +341,7 @@
                                                                 <span class="money">价格：</span>
                                                                 <span class="money" th:text="'￥ ' + ${productionsOrderBy1.price}"></span>
                                                             </div>
-                                                            <a th:href="'/addToCartWithProduction/'+${productionsOrderBy1.id}" class="btn btn-small btn-bg-sand btn-color-dark">加入购物车</a>
+                                                            <a th:href="'/addToCartWithProduction/'+${productionsOrderBy1.id}+'?page=index'" class="btn btn-small btn-bg-sand btn-color-dark">加入购物车</a>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -372,7 +373,7 @@
                                                                 <span class="money">价格：</span>
                                                                 <span class="money" th:text="'￥'+${productionsOrderBy2.price}"></span>
                                                             </div>
-                                                            <a th:href="'/addToCartWithProduction/'+${productionsOrderBy2.id}" class="btn btn-small btn-bg-sand btn-color-dark">加入购物车</a>
+                                                            <a th:href="'/addToCartWithProduction/'+${productionsOrderBy2.id}+'?page=index'" class="btn btn-small btn-bg-sand btn-color-dark">加入购物车</a>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -404,7 +405,7 @@
                                                                 <span class="money">价格：</span>
                                                                 <span class="money" th:text="'￥'+${productionsOrderBy3.price}"></span>
                                                             </div>
-                                                            <a th:href="'/addToCartWithProduction/'+${productionsOrderBy3.id}" class="btn btn-small btn-bg-sand btn-color-dark">加入购物车</a>
+                                                            <a th:href="'/addToCartWithProduction/'+${productionsOrderBy3.id}+'?page=index'" class="btn btn-small btn-bg-sand btn-color-dark">加入购物车</a>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -435,7 +436,7 @@
                                                                 <span class="money">价格：</span>
                                                                 <span class="money" th:text="'￥'+${productionsOrderBy4.price}"></span>
                                                             </div>
-                                                            <a th:href="'/addToCartWithProduction/'+${productionsOrderBy4.id}" class="btn btn-small btn-bg-sand btn-color-dark">加入购物车</a>
+                                                            <a th:href="'/addToCartWithProduction/'+${productionsOrderBy4.id}+'?page=index'" class="btn btn-small btn-bg-sand btn-color-dark">加入购物车</a>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -466,7 +467,7 @@
                                                                 <span class="money">价格：</span>
                                                                 <span class="money" th:text="'￥'+${productionsOrderBy5.price}"></span>
                                                             </div>
-                                                            <a th:href="'/addToCartWithProduction/'+${productionsOrderBy5.id}" class="btn btn-small btn-bg-sand btn-color-dark">加入购物车</a>
+                                                            <a th:href="'/addToCartWithProduction/'+${productionsOrderBy5.id}+'?page=index'" class="btn btn-small btn-bg-sand btn-color-dark">加入购物车</a>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -497,7 +498,7 @@
                                                                 <span class="money">价格：</span>
                                                                 <span class="money" th:text="'￥'+${productionsOrderBy6.price}"></span>
                                                             </div>
-                                                            <a th:href="'/addToCartWithProduction/'+${productionsOrderBy6.id}" class="btn btn-small btn-bg-sand btn-color-dark">加入购物车</a>
+                                                            <a th:href="'/addToCartWithProduction/'+${productionsOrderBy6.id}+'?page=index'" class="btn btn-small btn-bg-sand btn-color-dark">加入购物车</a>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -528,7 +529,7 @@
                                                                 <span class="money">价格：</span>
                                                                 <span class="money" th:text="'￥ '+${productionsOrderBy7.price}"></span>
                                                             </div>
-                                                            <a th:href="'/addToCartWithProduction/'+${productionsOrderBy7.id}" class="btn btn-small btn-bg-sand btn-color-dark">加入购物车</a>
+                                                            <a th:href="'/addToCartWithProduction/'+${productionsOrderBy7.id}+'?page=index'" class="btn btn-small btn-bg-sand btn-color-dark">加入购物车</a>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -559,7 +560,7 @@
                                                                 <span class="money">价格</span>
                                                                 <span class="money" th:text="${productionsOrderBy8.price}"></span>
                                                             </div>
-                                                            <a th:href="'/addToCartWithProduction/'+${productionsOrderBy8.id}" class="btn btn-small btn-bg-sand btn-color-dark">加入购物车</a>
+                                                            <a th:href="'/addToCartWithProduction/'+${productionsOrderBy8.id}+'?page=index'" class="btn btn-small btn-bg-sand btn-color-dark">加入购物车</a>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -707,15 +708,7 @@
                     <h3 class="mini-cart__heading mb--40 mb-lg--30">购物车</h3>
                     <div class="mini-cart__content" >
                         <ul id="cart_ul" class="mini-cart__list">
-                            <!--<li class="mini-cart__product">
-                                <a href="#" class="remove-from-cart remove">
-                                    <i class="flaticon flaticon-cross"></i>
-                                </a>
-                                <div class="mini-cart__product__content">
-                                    <a class="mini-cart__product__title" href="product-details.html"> </a>
-                                    <span class="mini-cart__product__quantity"></span>
-                                </div>
-                            </li>-->
+
                         </ul>
 
                         <div class="mini-cart__total">
@@ -915,19 +908,30 @@
          * @param cartItems
          */
         function add_Element_to_model(cartItems) {
+            reset_cart();
             var production_Sum = 0;
             for(var i = 0; i < cartItems.length; i++) {
                 var liTd = $("<li></li>").addClass("mini-cart__product");
-                var deleteTd = $("<a href='#'></a>").addClass("remove-from-cart remove");
+                var deleteTd = $("<a id='deleteProByCart'></a>").addClass("remove-from-cart remove").attr("href","/deleteProductionByCart/"+cartItems[i].id+"?page=index");
                 var iTd = $("<i></i>").addClass("flaticon flaticon-cross");
                 var divTd = $("<div></div>").addClass("mini-cart__product__content");
                 var nameTd = $("<a href='product-details.html'></a>").addClass("mini-cart__product__title").append(cartItems[i].name);
                 var countAndPrice = $("<span></span>").addClass("mini-cart__product__quantity").append(cartItems[i].count + ' × ' + cartItems[i].price + ' 元');
+                // var productionId = $("<input id='hiddenId' type='hidden'>").append(cartItems[i].id);
                 liTd.append(deleteTd.append(iTd)).append(divTd.append(nameTd).append(countAndPrice)).appendTo("#cart_ul");
                 production_Sum += cartItems[i].price * cartItems[i].count;
             }
             $("#count_span").append(production_Sum.toFixed(2) + ' 元');
         }
+
+        function reset_cart() {
+            var ul = document.getElementById("cart_ul");
+            while(ul.hasChildNodes()) {
+                ul.removeChild(ul.firstChild);
+            }
+            $("#count_span").text("");
+        }
+
     </script>
 
 </body>
