@@ -9,4 +9,5 @@ public interface ProductInformationMapperExt {
 
     List<ProductInformation> selectAllProduction();
 
+    List<ProductInformation> selectAllProductionOrderByModified();
 }

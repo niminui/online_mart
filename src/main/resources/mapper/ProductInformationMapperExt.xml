@@ -24,4 +24,8 @@
   <select id="selectAllProduction" resultMap="BaseResultMap" resultType="arraylist">
     select * from `product_information`
   </select>
+
+  <select id="selectAllProductionOrderByModified" resultMap="BaseResultMap" resultType="arraylist">
+     SELECT * FROM `product_information` ORDER BY `gmt_modified` DESC LIMIT 8
+  </select>
 </mapper>

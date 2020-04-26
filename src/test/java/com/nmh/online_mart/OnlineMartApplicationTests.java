@@ -8,6 +8,7 @@ class OnlineMartApplicationTests {
 
     @Test
     void contextLoads() {
+        System.out.println("这是一个灰色外衣这是一个灰色外衣这是一个灰色外衣这是一个灰色外衣这是一个灰色外衣这是一个灰色外衣这是一个灰色外衣这是一".length());
     }
 
 }

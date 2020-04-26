@@ -2,7 +2,6 @@ package com.nmh.online_mart.service;
 
 import com.nmh.online_mart.mapper.ProductInformationMapper;
 import com.nmh.online_mart.mapper.ProductInformationMapperExt;
-import com.nmh.online_mart.model.Administrator;
 import com.nmh.online_mart.model.ProductInformation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,5 +28,17 @@ public class ProductionService {
 
     public List<ProductInformation> showProductionList() {
        return productInformationMapperExt.selectAllProduction();
+    }
+
+    public boolean updateProductInformation(ProductInformation productInformation) {
+        return productInformationMapper.updateByPrimaryKeySelective(productInformation) == 1;
+    }
+
+    public List<ProductInformation> showProductionListOrderByGmtModified() {
+        return productInformationMapperExt.selectAllProductionOrderByModified();
+    }
+
+    public ProductInformation selectProductionById(Long id) {
+        return productInformationMapper.selectByPrimaryKey(id);
     }
 }

@@ -5,6 +5,7 @@ import com.nmh.online_mart.model.Administrator;
 import com.nmh.online_mart.model.User;
 import com.nmh.online_mart.service.LoginService;
 import com.nmh.online_mart.service.RegisterService;
+import com.nmh.online_mart.utils.CookieUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -42,13 +43,18 @@ public class LoginOrRegisterController {
     @RequestMapping("/login")
     public String login(@RequestParam("email")String email
             , @RequestParam("password")String password
-            , HttpServletResponse response) {
+            , HttpServletResponse response, HttpServletRequest request) {
 
         User user = loginService.userLogin(email, password);
         if(user == null) {
             return "redirect:/loginFail";
         } else {
+            String cookieName = "cart";
             response.addCookie(new Cookie("token",user.getToken()));
+            if(!CookieUtils.cookieIsExist(request,cookieName)) {
+                response.addCookie(new Cookie(cookieName,null));
+            }
+
         }
         return "redirect:/loginSuccess";
     }

@@ -1,7 +1,13 @@
 package com.nmh.online_mart.controller;
 
+import com.nmh.online_mart.model.ProductInformation;
+import com.nmh.online_mart.service.ProductionService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.List;
 
 /**
  * @author niminui
@@ -10,8 +16,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class IndexController {
 
+    @Autowired
+    private ProductionService productionService;
+
     @RequestMapping(value = {"/","/index"})
-    public String indexPage() {
+    public String indexPage(Model model) {
+        //查询最新修改的 8 前个商品
+        List<ProductInformation> productionsOrderBy = productionService.showProductionListOrderByGmtModified();
+        for(int i = 0; i < productionsOrderBy.size(); i++) {
+            model.addAttribute("productionsOrderBy" + (i + 1),productionsOrderBy.get(i));
+        }
+
         return "index";
     }
 
@@ -29,5 +44,6 @@ public class IndexController {
     public String proAddSuccess() {
         return "product_add_success";
     }
+
 
 }
