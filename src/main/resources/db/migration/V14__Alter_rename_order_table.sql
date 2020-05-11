@@ -1,0 +1,1 @@
+RENAME TABLE `online_mart`.`order` TO `online_mart`.`order_form`;

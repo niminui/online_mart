@@ -41,4 +41,8 @@ public class ProductionService {
     public ProductInformation selectProductionById(Long id) {
         return productInformationMapper.selectByPrimaryKey(id);
     }
+
+    public boolean deleteProductionById(Long id) {
+        return productInformationMapper.deleteByPrimaryKey(id) == 1;
+    }
 }

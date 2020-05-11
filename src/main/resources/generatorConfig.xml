@@ -32,7 +32,7 @@
         <table tableName="user" domainObjectName="User"/>
         <table tableName="administrator" domainObjectName="Administrator"/>
         <table tableName="notice" domainObjectName="Notice"/>
-        <table tableName="order" domainObjectName="Order"/>
+        <table tableName="order_form" domainObjectName="OrderForm"/>
         <table tableName="product_information" domainObjectName="ProductInformation"/>
         <table tableName="sales_record" domainObjectName="SalesRecord"/>
 

@@ -23,10 +23,7 @@ public class IndexController {
     public String indexPage(Model model) {
         //查询最新修改的 8 前个商品
         List<ProductInformation> productionsOrderBy = productionService.showProductionListOrderByGmtModified();
-        for(int i = 0; i < productionsOrderBy.size(); i++) {
-            model.addAttribute("productionsOrderBy" + (i + 1),productionsOrderBy.get(i));
-        }
-
+        model.addAttribute("productionsOrderBy",productionsOrderBy);
         return "index";
     }
 
@@ -43,6 +40,26 @@ public class IndexController {
     @RequestMapping("/productAddSuccess")
     public String proAddSuccess() {
         return "product_add_success";
+    }
+
+    @RequestMapping("/cart")
+    public String cart() {
+        return "cart";
+    }
+
+    @RequestMapping("/paymentSuccess")
+    public String paymentSuccess() {
+        return "paymentSuccess";
+    }
+
+    @RequestMapping("/orderDetails")
+    public String orderDetails() {
+        return "orderDetails";
+    }
+
+    @RequestMapping("/postNotice")
+    public String postNotice() {
+        return "manager-notice";
     }
 
 

@@ -40,7 +40,193 @@
 
     <!-- Main Wrapper Start -->
     <div class="wrapper">
-        <div th:replace="~{navigation :: navi}"></div>
+        <!-- 导航栏 -->
+        <header class="header">
+            <div class="header-inner fixed-header">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-xl-10 col-lg-9 col-3">
+                            <nav class="main-navigation">
+                                <div class="site-branding">
+                                    <a href="/" class="logo">
+                                        <figure class="logo--normal">
+                                            <img src="assets/img/logo/logo.png" alt="Logo">
+                                        </figure>
+                                    </a>
+                                </div>
+                                <div class="mainmenu-nav d-none d-lg-block" th:if="${session.administrator == null}">
+                                    <ul class="mainmenu">
+                                        <li class="mainmenu__item menu-item-has-children active">
+                                            <a href="/" class="mainmenu__link">
+                                                <span class="mm-text">主页</span>
+                                            </a>
+                                        </li>
+                                        <li class="mainmenu__item menu-item-has-children">
+                                            <a href="/shopController" class="mainmenu__link">
+                                                <span class="mm-text">商店</span>
+                                            </a>
+                                        </li>
+                                        <li class="mainmenu__item menu-item-has-children">
+                                            <a href="Blog.html" class="mainmenu__link">
+                                                <span class="mm-text">通知</span>
+                                            </a>
+                                        </li>
+                                        <li class="mainmenu__item">
+                                            <a href="contact-us.html" class="mainmenu__link">
+                                                <span class="mm-text">联系我们</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <div class="mainmenu-nav d-none d-lg-block" th:if="${session.administrator != null}">
+                                    <ul class="mainmenu">
+                                        <li class="mainmenu__item menu-item-has-children active">
+                                            <a href="/" class="mainmenu__link">
+                                                <span class="mm-text">主页</span>
+                                            </a>
+                                        </li>
+                                        <li class="mainmenu__item menu-item-has-children">
+                                            <a href="/showProductionList" class="mainmenu__link">
+                                                <span class="mm-text">商品列表</span>
+                                            </a>
+                                        </li>
+                                        <li class="mainmenu__item menu-item-has-children">
+                                            <a href="Blog.html" class="mainmenu__link">
+                                                <span class="mm-text">创建通知</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </nav>
+                        </div>
+                        <div class="col-xl-2 col-lg-3 col-9 text-right">
+                            <!--用户登录时导航信息-->
+                            <ul class="header-toolbar" th:if="${session.user != null && session.administrator == null}">
+                                <li class="header-toolbar__item">
+                                    <a href="wishlist.html" class="header-toolbar__btn">
+                                        <i class="flaticon flaticon-like"></i>
+                                    </a>
+                                </li>
+                                <!--购物车模态框-->
+                                <li class="header-toolbar__item mini-cart-item">
+                                    <a id="cartHref" href="#miniCart" class="header-toolbar__btn toolbar-btn mini-cart-btn">
+                                        <i class="flaticon flaticon-shopping-cart"></i>
+                                    </a>
+                                </li>
+
+                                <li class="header-toolbar__item user-info">
+                                    <a href="/myAccount" class="header-toolbar__btn">
+                                        <i class="flaticon flaticon-user"></i>
+                                    </a>
+                                    <ul class="active user-info-menu">
+                                        <li>
+                                            <a href="/myAccount">我的账户</a>
+                                        </li>
+                                        <li>
+                                            <a href="cart.html">购物车</a>
+                                        </li>
+
+                                        <li>
+                                            <a href="wishlist.html">心愿列表</a>
+                                        </li>
+                                        <li>
+                                            <a href="/logout">登出</a>
+                                        </li>
+                                    </ul>
+                                </li>
+
+                                <li class="header-toolbar__item">
+                                    <a href="#searchForm" class="header-toolbar__btn toolbar-btn">
+                                        <i class="flaticon flaticon-search"></i>
+                                    </a>
+                                </li>
+                                <li class="header-toolbar__item d-lg-none">
+                                    <a href="#" class="header-toolbar__btn menu-btn">
+                                        <i class="fa fa-bars"></i>
+                                    </a>
+                                </li>
+                            </ul>
+
+                            <!--用户未登录时导航信息-->
+                            <ul class="header-toolbar" th:if="${session.user == null && session.administrator == null} ">
+                                <li class="header-toolbar__item user-info">
+                                    <a href="/loginOrRegister" class="header-toolbar__btn">
+                                        <i class="flaticon flaticon-user"></i>
+                                    </a>
+                                    <ul class="active user-info-menu">
+                                        <li>
+                                            <a href="/loginOrRegister">登录 & 注册</a>
+                                        </li>
+                                        <li>
+                                            <a href="/managerLoginTemp">管理员登录</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="header-toolbar__item">
+                                    <a href="#searchForm" class="header-toolbar__btn toolbar-btn">
+                                        <i class="flaticon flaticon-search"></i>
+                                    </a>
+                                </li>
+                                <li class="header-toolbar__item d-lg-none">
+                                    <a href="#" class="header-toolbar__btn menu-btn">
+                                        <i class="fa fa-bars"></i>
+                                    </a>
+                                </li>
+                            </ul>
+
+                            <!--管理员登录时-->
+                            <!--用户登录时导航信息-->
+                            <ul class="header-toolbar" th:if="${session.user == null && session.administrator != null}">
+                                <li class="header-toolbar__item user-info">
+                                    <a href="/managerPage" class="header-toolbar__btn">
+                                        <i class="flaticon flaticon-user"></i>
+                                    </a>
+                                    <ul class="active user-info-menu">
+                                        <li>
+                                            <a href="/showProductionList">商品列表</a>
+                                        </li>
+                                        <li>
+                                            <a href="/managerPage">添加新的商品</a>
+                                        </li>
+                                        <li>
+                                            <a href="/logout">登出</a>
+                                        </li>
+                                    </ul>
+                                </li>
+
+                                <li class="header-toolbar__item">
+                                    <a href="#searchForm" class="header-toolbar__btn toolbar-btn">
+                                        <i class="flaticon flaticon-search"></i>
+                                    </a>
+                                </li>
+                                <li class="header-toolbar__item d-lg-none">
+                                    <a href="#" class="header-toolbar__btn menu-btn">
+                                        <i class="fa fa-bars"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="mobile-menu"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- 查询页面 -->
+        <div class="searchform__popup" id="searchForm">
+            <a href="#" class="btn-close"><i class="flaticon flaticon-cross"></i></a>
+            <div class="searchform__body">
+                <p>开始输入内容，然后按Enter键进行搜索</p>
+                <form class="searchform">
+                    <input type="text" name="popup-search" id="popup-search" class="searchform__input" placeholder="搜索整个商店...">
+                    <button type="submit" class="searchform__submit"><i class="flaticon flaticon-magnifying-glass-icon"></i></button>
+                </form>
+            </div>
+        </div>
 
         <!-- Main Content Wrapper Start -->
         <div  class="main-content-wrapper">
@@ -146,6 +332,7 @@
                                                         <div class="zakas-product-action-list d-flex">
                                                             <!--打开编辑模态框-->
                                                             <a data-toggle="modal" id="edit_btn" th:attr="data-target='#edit_production'+${production.id}" class="btn btn-small btn-bg-sand btn-color-dark">编辑</a>
+                                                            <a th:attr="href='/deleteProduction/'+${production.id}" id="del_btn" class="btn btn-small btn-bg-sand btn-color-dark">删除</a>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -174,13 +361,23 @@
                                                                         </div>
                                                                     </div>
 
-                                                                    <!--商品图片-->
+                                                                    <!--商品展示图-->
                                                                     <div class="form__group mb--20">
-                                                                        <label class="form__label form__label--2" for="photoFile">商品图片(尺寸：270*370) <span class="required">*</span></label>
+                                                                        <label class="form__label form__label--2" for="photoFile">商品展示图(尺寸：270*370) <span class="required">*</span></label>
                                                                         <div class="form__group mb--20">
                                                                             <a href="javascript:void(0)" onclick="uploadPhoto()">选择图片</a>
                                                                             <input type="file" name="avatarUrl" id="photoFile" style="display: none;" onchange="upload()">
                                                                             <img id="preview_photo" th:src="${production.avatarUrl}" width="270px" height="370px">
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <!--商品展示图-->
+                                                                    <div class="form__group mb--20">
+                                                                        <label class="form__label form__label--2" for="photoFileDetails">商品细节图(尺寸：499*625) <span class="required">*</span></label>
+                                                                        <div class="form__group mb--20">
+                                                                            <a href="javascript:void(0)" onclick="uploadPhotoDetails()">选择图片</a>
+                                                                            <input type="file" name="avatarUrl" id="photoFileDetails" style="display: none;" onchange="uploadDetails()">
+                                                                            <img id="preview_photo_details" th:src="${production.avatarUrlDetails}" width="499px" height="625px">
                                                                         </div>
                                                                     </div>
 
@@ -472,6 +669,10 @@
             $("#photoFile").click();
         }
 
+        function uploadPhotoDetails() {
+            $("#photoFileDetails").click();
+        }
+
         function upload() {
             if($("#photoFile").val() === '') {
                 return;
@@ -487,6 +688,28 @@
                 success: function(result) {
                     if (result.code === 100) {
                         $("#preview_photo").attr("src", result.extend.re_msg);
+                    } else {
+                        alert(result.extend.re_msg);
+                    }
+                }
+            });
+        }
+
+        function uploadDetails() {
+            if($("#photoFileDetails").val() === '') {
+                return;
+            }
+            var formData = new FormData;
+            formData.append('file',document.getElementById('photoFileDetails').files[0]);
+            $.ajax({
+                url:ctxPath + "/file/uploadProductionDetails",
+                type:"POST",
+                data:formData,
+                contentType: false,
+                processData: false,
+                success: function(result) {
+                    if (result.code === 100) {
+                        $("#preview_photo_details").attr("src", result.extend.re_msg);
                     } else {
                         alert(result.extend.re_msg);
                     }

@@ -38,7 +38,23 @@ public class FileController {
             e.printStackTrace();
             return MsgDTO.fail().add("re_msg","图片上传失败！请重试");
         }
-        request.getSession().setAttribute("fileName", JSON.toJSONString(fileName));
+        request.getSession().setAttribute("fileName1", JSON.toJSONString(fileName));
+        return MsgDTO.success().add("re_msg",fileName);
+    }
+
+    @RequestMapping(value = "/uploadProductionDetails", method = RequestMethod.POST)
+    @ResponseBody
+    public MsgDTO uploadProductionDetails(MultipartFile file, HttpServletRequest request) {
+        URL fileName = null;
+        try {
+            assert file != null;
+            fileName = aLiYunProvider.upload(file.getInputStream(),
+                    file.getContentType(), Objects.requireNonNull(file.getOriginalFilename()));
+        } catch (IOException e) {
+            e.printStackTrace();
+            return MsgDTO.fail().add("re_msg","图片上传失败！请重试");
+        }
+        request.getSession().setAttribute("fileName2", JSON.toJSONString(fileName));
         return MsgDTO.success().add("re_msg",fileName);
     }
 
